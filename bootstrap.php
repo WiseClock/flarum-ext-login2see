@@ -4,7 +4,6 @@ namespace WiseClock\Login2See;
 
 use DirectoryIterator;
 use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Event\PrepareApiAttributes;
 use Flarum\Event\ConfigureClientView;
 use Flarum\Event\ConfigureLocales;
 

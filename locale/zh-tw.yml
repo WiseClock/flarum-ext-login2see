@@ -16,3 +16,7 @@ wiseclock-login2see:
     image:
       title: 圖片
       label: 將圖片替換為佔位區塊
+    php:
+      title: 傳統模式
+      help: "*不推薦* 使用伺服器端處理以支持古董瀏覽器。你必須在PHP內開啟<code>mb_substr</code>及<code>mb_strlen</code>"
+      label: 使用PHP處理

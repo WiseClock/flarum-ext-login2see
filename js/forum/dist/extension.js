@@ -20,6 +20,7 @@ System.register('wiseclock/flarum-ext-login2see/main', ['flarum/extend', 'flarum
         execute: function () {
 
             app.initializers.add('wiseclock-login2see', function () {
+                var wiseclockLogin2seeUsePHP = undefined;
                 var wiseclockLogin2seePostsLength = undefined;
                 var wiseclockLogin2seeReplaceLinks = undefined;
                 var wiseclockLogin2seeReplaceImages = undefined;
@@ -64,10 +65,13 @@ System.register('wiseclock/flarum-ext-login2see/main', ['flarum/extend', 'flarum
                     if (isNaN(wiseclockLogin2seePostsLength)) wiseclockLogin2seePostsLength = -1;
                     wiseclockLogin2seeReplaceLinks = app.forum.attribute('wiseclock.login2see.link') || 'replace_address';
                     wiseclockLogin2seeReplaceImages = JSON.parse(app.forum.attribute('wiseclock.login2see.image') || 0);
+                    wiseclockLogin2seeUsePHP = JSON.parse(app.forum.attribute('wiseclock.login2see.php') || 0);
                 });
 
                 extend(CommentPost.prototype, 'content', function (list) {
                     if (app.session.user || this.isEditing()) return;
+
+                    if (wiseclockLogin2seeUsePHP) return;
 
                     var oldContent = list[1].children[0].toString();
                     var newContent = oldContent;

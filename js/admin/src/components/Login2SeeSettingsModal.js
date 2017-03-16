@@ -53,6 +53,16 @@ export default class Login2SeeSettingsModal extends SettingsModal
                         children: app.translator.trans('wiseclock-login2see.admin.image.label'),
                     }),
                 ]),
+                m('fieldset', {className: 'WiseClockLogin2See-php'}, [
+                    m('legend', {}, app.translator.trans('wiseclock-login2see.admin.php.title')),
+                    m('div', {className: 'helpText'}, app.translator.trans('wiseclock-login2see.admin.php.help')),
+                    Switch.component(
+                    {
+                        state: JSON.parse(this.setting('wiseclock.login2see.php', 0)()),
+                        onchange: this.setting('wiseclock.login2see.php', 1),
+                        children: app.translator.trans('wiseclock-login2see.admin.php.label'),
+                    }),
+                ]),
             ]),
         ];
     }

@@ -8,6 +8,7 @@ import SignUpModal from 'flarum/components/SignUpModal';
 
 app.initializers.add('wiseclock-login2see', function()
 {
+    let wiseclockLogin2seeUsePHP;
     let wiseclockLogin2seePostsLength;
     let wiseclockLogin2seeReplaceLinks;
     let wiseclockLogin2seeReplaceImages;
@@ -69,11 +70,15 @@ app.initializers.add('wiseclock-login2see', function()
             wiseclockLogin2seePostsLength = -1;
         wiseclockLogin2seeReplaceLinks = app.forum.attribute('wiseclock.login2see.link') || 'replace_address';
         wiseclockLogin2seeReplaceImages = JSON.parse(app.forum.attribute('wiseclock.login2see.image') || 0);
+        wiseclockLogin2seeUsePHP = JSON.parse(app.forum.attribute('wiseclock.login2see.php') || 0);
     });
 
     extend(CommentPost.prototype, 'content', function(list)
     {
         if (app.session.user || this.isEditing())
+            return;
+
+        if (wiseclockLogin2seeUsePHP)
             return;
 
         let oldContent = list[1].children[0].toString();
